@@ -1,0 +1,13 @@
+@import "./mixins.module";
+html {
+  font-size: 100%;
+  @include respond(tab) {
+    font-size: 100%;
+  }
+  @include respond(desktop) {
+    font-size: 112.5%;
+  }
+  @include respond(big-desktop) {
+    font-size: 125%;
+  }
+}
