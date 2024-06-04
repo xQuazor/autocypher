@@ -1,1 +1,43 @@
 @import "../scss/mixins.module";
+@import "../scss/variables.module";
+
+.heading1{
+  font-family: $font-primary;
+  font-weight: $font-weight-medium;
+  font-size: 2rem;
+  line-height: normal;
+  color: $color-black;
+}
+
+.heading2{
+  font-family: $font-primary;
+  font-weight: $font-weight-semibold;
+  font-size: 1.77rem;
+  color: $color-accent;
+}
+
+.heading3{
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 1.33rem;
+  color: $color-accent;
+}
+
+.heading4{
+  font-family: $font-primary;
+  font-weight: $font-weight-semibold;
+  font-size: 1.33rem;
+  color: $color-accent;
+}
+
+.paragraph{
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 0.89rem;
+  color: $color-black;
+
+  &__grey{
+    @extend .paragraph;
+    color: $color-grey;
+  }
+}
