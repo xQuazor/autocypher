@@ -1,3 +1,5 @@
+@import "../scss/variables.module";
+
 .container {
   display: flex;
   flex-flow: column wrap;
@@ -22,13 +24,21 @@
     position: relative;
     width: 24rem;
     height: 16rem;
+    filter: drop-shadow(0.25rem 0.25rem 0.25rem rgb(0,0,0,0.25));
   }
 }
 
 .section2 {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 135vh;
+  &__line{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 0.25rem;
+    background-color: $color-black
+  }
   &__background {
     z-index: -2;
   }
@@ -36,7 +46,7 @@
     position: absolute;
     top: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     z-index: -1;
     background:
       linear-gradient(
@@ -74,12 +84,14 @@
   }
 }
 
+
+
 .item {
   animation: slideIn 1s ease-in-out;
 }
 
 .rotate {
-  animation: rot 2s infinite alternate linear;
+  animation: rotate 2s infinite linear;
 }
 
 @for $i from 1 to 10 {
@@ -99,11 +111,18 @@
   }
 }
 
-@keyframes rot {
-  from {
-    transform: rotate(0);
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translateX(0.25rem);
   }
-  to {
-    transform: rotate(720deg);
+  50% {
+    transform: rotate(180deg) translateX(0rem);
+  }
+  100% {
+    transform: rotate(360deg) translateX(0.24rem);
   }
 }
+
+
+
+
