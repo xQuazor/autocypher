@@ -40,4 +40,9 @@
     @extend .paragraph;
     color: $color-grey;
   }
+
+  &__white{
+    @extend .paragraph;
+    color: $color-white;
+  }
 }

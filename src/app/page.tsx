@@ -5,6 +5,7 @@ import typography from "../scss/typography.module.scss";
 import utilities from "../scss/utlities.module.scss";
 import Image from "next/image";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import FlightIcon from "@mui/icons-material/Flight";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,9 +21,10 @@ export default function Home() {
 }
 
 function Section1() {
+  const images = Array.from({ length: 4 }, (_, index) => index + 1);
   return (
     <section className={styles.section1}>
-      <div className={styles.section1__left}>
+      <div className={styles.section1Left}>
         <h1 className={typography.heading1}>
           Automated Synthesis of Stochastic Cyber-Physical Systems:
         </h1>
@@ -33,35 +35,19 @@ function Section1() {
           Learn more <KeyboardArrowDownIcon />
         </p>
       </div>
-      <div className={styles.section1__right}>
-        <Image
-          alt={"Hero Image Layer 1"}
-          src={"/home/cyber_layer_1.png"}
-          fill={true}
-          style={{ objectFit: "contain" }}
-          className={styles.item}
-        />
-        <Image
-          alt={"Hero Image Layer 2"}
-          src={"/home/cyber_layer_2.png"}
-          fill={true}
-          style={{ objectFit: "contain" }}
-          className={styles.item}
-        />
-        <Image
-          alt={"Hero Image Layer 3"}
-          src={"/home/cyber_layer_3.png"}
-          fill={true}
-          style={{ objectFit: "contain" }}
-          className={styles.rotate}
-        />
-        <Image
-          alt={"Hero Image Layer 4"}
-          src={"/home/cyber_layer_4.png"}
-          fill={true}
-          style={{ objectFit: "contain" }}
-          className={styles.item}
-        />
+      <div className={styles.section1Right}>
+        {images.map((number) => {
+          return (
+            <Image
+              key={number}
+              alt={`Hero Image Layer ${number}`}
+              src={`/home/cyber_layer_${number}.png`}
+              fill={true}
+              style={{ objectFit: "contain" }}
+              className={number === 3 ? styles.rotate : styles.item}
+            />
+          );
+        })}
       </div>
     </section>
   );
@@ -70,40 +56,14 @@ function Section1() {
 function Section2() {
   return (
     <section className={styles.section2}>
-      <div className={styles.glowingcircle}></div>
-      <div className={styles.section2__backdrop}></div>
       <LineAndBoxesAnimation />
       <Image
-        className={styles.section2__background}
+        className={styles.section2Background}
         src={"/home/section2.webp"}
         alt={"Background Image"}
         fill={true}
         style={{ objectFit: "cover" }}
       />
-      <div className={styles.section2__box}>
-        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
-          What are Cyber-Physical Systems?
-        </h3>
-        <p className={typography.paragraph}>
-          Cyber-physical systems (CPS) are complex systems with tight
-          interactions between cyber elements and physical components. The cyber
-          elements are control algorithms implemented by computer-based
-          software.
-        </p>
-      </div>
-      <div className={styles.section2__box}>
-        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
-          Issues with Control Software
-        </h3>
-        <p className={typography.paragraph}>
-          Developing the embedded control software for CPS is currently ad hoc
-          and error-prone, which has created costly undesired behaviours,
-          particularly in safety-critical applications.
-        </p>
-      </div>
-      <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
-        Real World Examples of CPS failure
-      </h3>
     </section>
   );
 }
@@ -123,7 +83,7 @@ const LineAndBoxesAnimation = () => {
     // Ensure the full page height is used for scroll calculations
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top top",
+      start: `top bottom-=${0.35 * viewportHeight}`,
       end: totalScrollAmount,
       onUpdate: (self) => {
         // Line height adjusted according to the progress through 200vh
@@ -136,7 +96,7 @@ const LineAndBoxesAnimation = () => {
     boxRefs.current.forEach((box, index) => {
       gsap.fromTo(
         box,
-        { x: -100, autoAlpha: 0 },
+        { x: index % 2 ? -150 : 150, autoAlpha: 0 },
         {
           x: 0,
           autoAlpha: 1,
@@ -165,30 +125,67 @@ const LineAndBoxesAnimation = () => {
 
   return (
     <section className={styles.section2} ref={containerRef}>
-      <div className={styles.glowingcircle}></div>
-      <div className={styles.section2__backdrop}></div>
-      <div ref={lineRef} className={styles.section2__line}></div>
-      {[1, 2, 3].map((_, i) => (
-        <div
-          key={i}
-          ref={addBoxRef}
-          style={{
-            position: "absolute",
-            top: `${33 * (i + 1)}vh`,
-            left: "50%",
-            width: "200px",
-            marginLeft: "-100px",
-            height: "50px",
-            backgroundColor: "blue",
-            color: "white",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          Box {i + 1}
-        </div>
-      ))}
+      <div className={styles.section2Backdrop}></div>
+      <div ref={lineRef} className={styles.section2Line}></div>
+      <div
+        className={styles.section2Box}
+        ref={addBoxRef}
+        style={{ top: "25vh", left: "55%" }}
+      >
+        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
+          What are Cyber-Physical Systems?
+        </h3>
+        <p className={typography.paragraph}>
+          Cyber-physical systems (CPS) are complex systems with tight
+          interactions between cyber elements and physical components. The cyber
+          elements are control algorithms implemented by computer-based
+          software.
+        </p>
+      </div>
+      <div
+        className={styles.section2Box}
+        ref={addBoxRef}
+        style={{ top: "60vh", right: "55%" }}
+      >
+        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
+          Issues with Control Software
+        </h3>
+        <p className={typography.paragraph}>
+          Developing the embedded control software for CPS is currently ad hoc
+          and error-prone, which has created costly undesired behaviours,
+          particularly in safety-critical applications.
+        </p>
+      </div>
+      <h3
+        className={typography.heading3 + " " + utilities.margin_bot_small}
+        style={{
+          position: "absolute",
+          top: "90vh",
+          left: "50%",
+          transform: "-50% -50%",
+        }}
+      >
+        Real World Examples of CPS failure
+      </h3>
+      <CPSFailureBox
+        text={
+          "Crash of airplanes due to software bugs (Boeing 737 Max, costed the company €15.9 billion)"
+        }
+      />
     </section>
   );
 };
+
+// @ts-ignore
+function CPSFailureBox({ text }) {
+  return (
+    <div className={styles.section2PositionBoxes}>
+      <div className={styles.section2FailureBox}>
+        <p className={typography.paragraph__white}>{text}</p>
+        <div className={styles.section2FailureBoxIcon}>
+          <FlightIcon sx={{ fontSize: 36 }} />
+        </div>
+      </div>
+    </div>
+  );
+}
