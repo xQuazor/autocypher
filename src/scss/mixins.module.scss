@@ -43,7 +43,14 @@
 
 // Positioning queries
 
-@mixin flex-grid($justify-content: center, $align-items: center, $flex-direction: row) {
+@mixin flex-grid-horizontal($justify-content: center, $align-items: center, $flex-direction: row) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+}
+
+@mixin flex-grid-vertical($justify-content: center, $align-items: center, $flex-direction: column) {
   display: flex;
   justify-content: $justify-content;
   align-items: $align-items;

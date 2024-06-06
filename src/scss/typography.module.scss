@@ -5,8 +5,8 @@
   font-family: $font-primary;
   font-weight: $font-weight-medium;
   font-size: 2rem;
-  line-height: normal;
   color: $color-black;
+  line-height: normal;
 }
 
 .heading2{
@@ -43,6 +43,18 @@
 
   &__white{
     @extend .paragraph;
+    color: $color-white;
+  }
+}
+
+.footer {
+  font-family: $font-primary;
+  font-weight: $font-weight-light;
+  font-size: 0.89rem;
+  color: $color-black;
+
+  &__white{
+    @extend .footer;
     color: $color-white;
   }
 }

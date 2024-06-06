@@ -1,0 +1,32 @@
+@import "../../scss/mixins.module";
+@import "../../scss/variables.module";
+.container {
+  .containerTop {
+    @include shape(12rem, 100vw, 0, $color-accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    .containerTopLeft {
+      @include shape(8rem, 32rem, 0, $color-accent);
+      @include flex-grid-horizontal;
+      gap: 1rem;
+    }
+
+    .containerTopRight {
+      @include flex-grid-horizontal;
+      gap: 1rem;
+    }
+  }
+  .containerBottom {
+    @include shape(5rem, 100vw, 0, $color-black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+  }
+  .containerFlag {
+    @include shape(6rem, 8rem, 0, transparent);
+    position: relative;
+  }
+}
