@@ -2,7 +2,7 @@
 @import "../../scss/variables.module";
 .container {
   .containerTop {
-    @include shape(12rem, 100vw, 0, $color-accent);
+    @include shape(10rem, 100vw, 0, $color-accent);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,7 +19,7 @@
     }
   }
   .containerBottom {
-    @include shape(5rem, 100vw, 0, $color-black);
+    @include shape(4rem, 100vw, 0, $color-black);
     display: flex;
     justify-content: space-between;
     align-items: center;

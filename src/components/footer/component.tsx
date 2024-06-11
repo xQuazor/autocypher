@@ -22,8 +22,8 @@ export default function Footer() {
           </p>
         </div>
         <div className={styles.containerTopRight}>
-          <LinkedInIcon htmlColor={"#FAF5F8"} sx={{fontSize: 40}}/>
-          <XIcon htmlColor={"#FAF5F8"} sx={{fontSize: 40}}/>
+          <LinkedInIcon htmlColor={"#FAF5F8"} sx={{fontSize: 36}}/>
+          <XIcon htmlColor={"#FAF5F8"} sx={{fontSize: 36}}/>
         </div>
 
       </div>

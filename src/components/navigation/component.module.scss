@@ -1,15 +1,14 @@
 @import "../../scss/variables.module";
-
+@import "../../scss/mixins.module";
 .container {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
   padding: 0 3rem 0 2rem;
-  height: 5rem;
   width: 100vw;
-  background-color: transparent;
   position: absolute;
+  z-index: 99;
   top: 0;
   &__logo{
     position: relative;
@@ -43,6 +42,29 @@
     &::before {
       visibility: visible;
       transform: scaleX(1);
+    }
+  }
+}
+
+.menuIcon {
+  display: none; // Hide menu icon on desktop
+}
+
+@include respond(phone){
+  .menuIcon{
+    display: block;
+    height: 4rem;
+  }
+  .container{
+    flex-flow: row wrap;
+    &__logo {
+      display: none;
+    }
+    &__links {
+      display: flex;
+      flex-flow: column;
+      gap: 1rem;
+      width: 100vw;
     }
   }
 }

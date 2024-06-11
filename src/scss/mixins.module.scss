@@ -48,6 +48,10 @@
   justify-content: $justify-content;
   align-items: $align-items;
   flex-direction: $flex-direction;
+
+  @include respond(phone){
+    flex-direction: column;
+  }
 }
 
 @mixin flex-grid-vertical($justify-content: center, $align-items: center, $flex-direction: column) {
@@ -74,5 +78,10 @@
   width: $width;
   border-radius: $borderRadius;
   background-color: $color;
+
+  @include respond(phone){
+    height: $height / 1.125;
+    width: $width / 1.125;
+  }
 }
 

@@ -5,8 +5,14 @@ import typography from "../scss/typography.module.scss";
 import utilities from "../scss/utlities.module.scss";
 import Image from "next/image";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import FlightIcon from "@mui/icons-material/Flight";
-import { Navigation } from "swiper/modules";
+import BoltIcon from "@mui/icons-material/Bolt";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import CalculateIcon from "@mui/icons-material/Calculate";
+import BalanceIcon from "@mui/icons-material/Balance";
+import ExpandIcon from "@mui/icons-material/Expand";
+import {Autoplay } from "swiper/modules";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,6 +20,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+
+const colourBlack = "#1F3249";
 export default function Home() {
   return (
     <main className={styles.container}>
@@ -48,7 +56,13 @@ function Section1() {
               src={`/home/cyber_layer_${number}.png`}
               fill={true}
               style={{ objectFit: "contain" }}
-              className={number === 3 ? styles.rotate : styles.item}
+              className={
+                number === 3
+                  ? styles.rotate
+                  : styles.item && number === 4
+                    ? ""
+                    : styles.item
+              }
             />
           );
         })}
@@ -76,30 +90,49 @@ function Section3() {
   return (
     <section className={styles.section3}>
       <div className={styles.section3Left}>
-        <h3 className={typography.heading3 + " " + utilities.margin_bot}>Project Objectives</h3>
-        <ol className={styles.section3LeftList}>
-          <li className={typography.paragraph}>
-            Reduce the conservatism by moving away from the worst-case behaviour
-            of the uncertainty and including the statistics of the uncertainty
-            in the analysis.
-          </li>
-          <li className={typography.paragraph}>
-            Relax the need for having a precise mathematical description of the
-            cyber-physical system.
-          </li>
-          <li className={typography.paragraph}>
-            Adapt the design for trade-offs between various performance
-            criteria.
-          </li>
-          <li className={typography.paragraph}>
-            Mitigate the exponential computational complexity to handle
-            large-scale cyber-physical systems.
-          </li>
-        </ol>
+        <h3 className={typography.heading3 + " " + utilities.margin_bot}>
+          Project Objectives
+        </h3>
+        <ul className={styles.section3LeftList}>
+          <div className={styles.section3LeftListItem}>
+            <BarChartIcon htmlColor={colourBlack} sx={{ fontSize: 36 }} />
+            <li className={typography.paragraph}>
+              Reduce the conservatism by moving away from the worst-case
+              behaviour of the uncertainty and including the statistics of the
+              uncertainty in the analysis.
+            </li>
+          </div>
+          <div className={styles.section3LeftListItem}>
+            <CalculateIcon htmlColor={colourBlack} sx={{ fontSize: 36 }} />
+            <li className={typography.paragraph}>
+              Relax the need for having a precise mathematical description of
+              the cyber-physical system.
+            </li>
+          </div>
+          <div className={styles.section3LeftListItem}>
+            <BalanceIcon htmlColor={colourBlack} sx={{ fontSize: 36 }} />
+            <li className={typography.paragraph}>
+              Adapt the design for trade-offs between various performance
+              criteria.
+            </li>
+          </div>
+          <div className={styles.section3LeftListItem}>
+            <ExpandIcon htmlColor={colourBlack} sx={{ fontSize: 36 }} />
+            <li className={typography.paragraph}>
+              Mitigate the exponential computational complexity to handle
+              large-scale cyber-physical systems.
+            </li>
+          </div>
+        </ul>
       </div>
-        <div className={styles.section3Right}>
-            <Image alt={"illustration"} src={"/home/section3.png"} fill={true}    style={{ objectFit: "contain" }}/>
-        </div>
+      <div className={styles.section3Right}>
+        <Image
+          alt={"illustration"}
+          src={"/home/section3.png"}
+          fill={true}
+          style={{ objectFit: "contain" }}
+        />
+      </div>
     </section>
   );
 }
@@ -114,7 +147,7 @@ const LineAndBoxesAnimation = () => {
 
   useEffect(() => {
     const viewportHeight = window.innerHeight;
-    const totalScrollAmount = 1.35 * window.innerHeight;
+    const totalScrollAmount = 1.01 * window.innerHeight;
 
     ScrollTrigger.create({
       trigger: containerRef.current,
@@ -123,7 +156,7 @@ const LineAndBoxesAnimation = () => {
       onUpdate: (self) => {
         gsap.set(lineRef.current, {
           height: `${self.progress * totalScrollAmount}px`,
-          maxHeight: `${0.68 * totalScrollAmount}px`,
+          maxHeight: `${0.74 * viewportHeight}px`,
         });
       },
     });
@@ -153,7 +186,7 @@ const LineAndBoxesAnimation = () => {
             trigger: circle,
             start: `top bottom-=${0.28 * viewportHeight}`,
             toggleActions: "play none none reverse",
-            markers: true,
+            // markers: true,
           },
         },
       );
@@ -185,17 +218,22 @@ const LineAndBoxesAnimation = () => {
       <div
         ref={addCircleRef}
         className={styles.section2Circle}
-        style={{ top: "25vh" }}
+        style={{ top: "20vh" }}
       ></div>
       <div
         ref={addCircleRef}
         className={styles.section2Circle}
-        style={{ top: "60vh" }}
+        style={{ top: "45vh" }}
+      ></div>
+      <div
+        ref={addCircleRef}
+        className={styles.section2Circle}
+        style={{ top: "74vh" }}
       ></div>
       <div
         className={styles.section2Box}
         ref={addBoxRef}
-        style={{ top: "15vh", left: "55%" }}
+        style={{ top: "10vh", left: "55%" }}
       >
         <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
           What are Cyber-Physical Systems?
@@ -210,7 +248,7 @@ const LineAndBoxesAnimation = () => {
       <div
         className={styles.section2Box}
         ref={addBoxRef}
-        style={{ top: "50vh", right: "55%" }}
+        style={{ top: "35vh", right: "55%" }}
       >
         <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
           Issues with Control Software
@@ -221,8 +259,12 @@ const LineAndBoxesAnimation = () => {
           particularly in safety-critical applications.
         </p>
       </div>
-      <div className={styles.section2InfoBoxes}>
-        <h3 className={typography.heading3 + " " + utilities.margin_bot}>
+      <div
+        className={styles.section2InfoBoxes}
+        ref={addBoxRef}
+        style={{ top: "55vh", left: "54%" }}
+      >
+        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
           Real World Examples of CPS failure
         </h3>
         <Carousel />
@@ -232,45 +274,60 @@ const LineAndBoxesAnimation = () => {
 };
 
 // @ts-ignore
-function CPSFailureBox({ text }) {
+function CPSFailureBox({ heading, text, icon }) {
   return (
     <div className={styles.section2FailureBox}>
-      <p className={typography.paragraph__white}>{text}</p>
-      <div className={styles.section2FailureBoxIcon}>
-        <FlightIcon sx={{ fontSize: 36 }} />
-      </div>
+      <p className={typography.paragraph__emphasis}>
+        {heading} {icon}
+      </p>
+      <p className={typography.paragraph + " " + utilities.margin_bot_small}>
+        {text}
+      </p>
+      <a className={typography.paragraph__grey}> Learn More</a>
+      {/*<div className={styles.section2FailureBoxIcon}>{icon}</div>*/}
     </div>
   );
 }
+
 function Carousel() {
   return (
     <Swiper
       spaceBetween={50}
       slidesPerView={1}
-      modules={[Navigation]}
-      navigation
+      modules={[Autoplay]}
+      loop={true}
+      autoplay={{
+        delay: 4000,
+        disableOnInteraction: false,
+      }}
       centeredSlides={true}
       className={styles.section2Carousel}
     >
       <SwiperSlide className={styles.section2CarouselSlide}>
         <CPSFailureBox
+          heading={"Airplanes"}
           text={
-            "Crash of airplanes due to software bugs (Boeing 737 Max, costed the company €15.9 billion)"
+            "Crash of airplanes due to software bugs (Boeing 737 Max, costed the company €15.9 billion)."
           }
+          icon={<FlightIcon sx={{ fontSize: 36 }} />}
         />
       </SwiperSlide>
       <SwiperSlide className={styles.section2CarouselSlide}>
         <CPSFailureBox
+          heading={"Autonomous Cars"}
           text={
-            "Crash of airplanes due to software bugs (Boeing 737 Max, costed the company €15.9 billion)"
+            "Autonomous cars having software bugs (Toyota recalled 65,000 cars in 2015)."
           }
+          icon={<DirectionsCarIcon sx={{ fontSize: 36 }} />}
         />
       </SwiperSlide>
       <SwiperSlide className={styles.section2CarouselSlide}>
         <CPSFailureBox
+          heading={"Power Networks"}
           text={
-            "Crash of airplanes due to software bugs (Boeing 737 Max, costed the company €15.9 billion)"
+            "Frequency deviation in power networks causing outages or blackouts (e.g. in Jan 2021 in EU, affecting 200k households)."
           }
+          icon={<BoltIcon sx={{ fontSize: 36 }} />}
         />
       </SwiperSlide>
     </Swiper>

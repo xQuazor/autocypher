@@ -27,7 +27,7 @@
 .section2 {
   position: relative;
   width: 100vw;
-  height: 135vh;
+  height: 101vh;
   .section2Line {
     @include shape(0, 0.15rem, 0, #d9d9d9);
     position: absolute;
@@ -35,7 +35,7 @@
     top: 0;
   }
   .section2Background {
-    position: fixed;
+    position: sticky;
     z-index: -2;
   }
   .section2Backdrop {
@@ -77,39 +77,46 @@
   .section2Box {
     @include shape(12rem, 24rem, 0, transparent);
     position: absolute;
-    text-align: center;
+    text-align: justify;
   }
   .section2FailureBox {
-    @include flex-grid-horizontal;
-    @include shape(8rem, 16rem, 1rem, #607895);
+    display: flex;
+    text-align: justify;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    //#607895
+    @include shape(6rem, 24rem, 1rem, transparent );
     position: relative;
-    padding: 1rem 2.5rem 1rem 1rem;
+    padding: 1rem 0;
     .section2FailureBoxIcon {
       @include flex-grid-horizontal;
       @include shape(4rem, 4rem, 50%, $color-white);
+      z-index: -1;
       position: absolute;
-      right: -2rem;
+      bottom: -1rem;
     }
   }
   .section2InfoBoxes {
     @include flex-grid-vertical;
+    align-items: flex-start;
     @include shape(16rem, 24rem, 0, rgb($color-white, 0));
     filter: drop-shadow(0.25rem 0.25rem 0.25rem rgb($color-black, 0.25));
     padding: 2rem 1rem;
     position: absolute;
-    top: 90vh;
     left: calc(50% - 24rem / 2);
   }
   .section2Carousel {
-    @include shape(16rem, 24rem, 0, rgb($color-white, 0));
+    @include shape(8rem, 24rem, 0, rgb($color-white, 0));
     @include flex-grid-horizontal;
-
     .section2CarouselSlide {
       @include flex-grid-horizontal;
     }
   }
   .section2Circle {
-    @include shape(2rem, 2rem, 50%, #d9d9d9);
+    @include shape(2rem, 2rem, 50%, $color-white);
     position: absolute;
     left: calc(50% - 2rem / 2);
     border: 0.75rem solid $color-white ;
@@ -121,7 +128,7 @@
         transform: scale(1);
       }
       50% {
-        box-shadow: 0 0 0.5rem 0.25rem rgba($color-accent, 0.3);
+        box-shadow: 0 0 0.5rem 0.25rem rgba($color-white, 0.3);
         transform: scale(1.1);
       }
     }
@@ -135,11 +142,18 @@
     @include shape(20rem, 24rem, 0, transparent);
     gap: 1rem;
     .section3LeftList {
+      //list-style-type: square;
+      //list-style-position: inside;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       flex-direction: column;
       gap: 1rem;
+      text-align: justify;
+      .section3LeftListItem{
+        @include flex-grid-horizontal;
+        gap: 1rem;
+      }
     }
   }
   .section3Right {
@@ -149,7 +163,9 @@
 }
 
 .item {
-  animation: slideIn 1s ease-in-out;
+  //animation: slideIn 1s ease-in-out;
+  mask-image: linear-gradient(to bottom, transparent, transparent 50%, black 50%);
+  animation: revealImage 5s ease-in-out forwards;
 }
 
 .rotate {
@@ -158,18 +174,18 @@
 
 @for $i from 1 to 10 {
   .item:nth-child(#{$i}) {
-    animation-delay: $i * 0.2s;
+    animation-delay: $i * 0.5s;
   }
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(8rem);
+    //transform: translateX(8rem);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    //transform: translateX(0);
   }
 }
 
@@ -182,5 +198,17 @@
   }
   100% {
     transform: rotate(360deg) translateX(0.24rem);
+  }
+}
+@keyframes revealImage {
+  0% {
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 100%, rgba(0,0,0,1) 100%); // Start with half of the image masked
+    mask-size: 200% 200%; // Increase mask size to cover entire image
+    mask-position: top; // Start the mask from the top
+  }
+  100% {
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 0%); // End with no mask
+    mask-size: 100% 100%; // Normal mask size
+    mask-position: bottom; // Move the mask to the bottom
   }
 }
