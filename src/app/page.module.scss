@@ -4,11 +4,6 @@
 .container {
   display: flex;
   flex-flow: column wrap;
-  background: linear-gradient(
-    90deg,
-    rgba(250, 245, 248, 0.75) 0%,
-    rgba(148, 145, 147, 0) 100%
-  );
 }
 
 .section1 {
@@ -31,7 +26,7 @@
   .section2Line {
     @include shape(0, 0.15rem, 0, #d9d9d9);
     position: absolute;
-    left: calc(50% - 0.15rem / 2);
+    left: calc(40% - 0.15rem / 2);
     top: 0;
   }
   .section2Background {
@@ -78,17 +73,22 @@
     @include shape(12rem, 24rem, 0, transparent);
     position: absolute;
     text-align: justify;
+    left: 45%;
+    &:nth-of-type(odd) {
+      top: 10vh;
+    }
+    &:nth-of-type(even) {
+      top: 35vh;
+
+    }
   }
   .section2FailureBox {
     display: flex;
     text-align: justify;
     flex-flow: row wrap;
     justify-content: flex-start;
-    align-items: center;
-    justify-items: center;
     align-content: center;
-    //#607895
-    @include shape(6rem, 24rem, 1rem, transparent );
+    @include shape(6rem, 24rem, 1rem, transparent);
     position: relative;
     padding: 1rem 0;
     .section2FailureBoxIcon {
@@ -104,9 +104,9 @@
     align-items: flex-start;
     @include shape(16rem, 24rem, 0, rgb($color-white, 0));
     filter: drop-shadow(0.25rem 0.25rem 0.25rem rgb($color-black, 0.25));
-    padding: 2rem 1rem;
     position: absolute;
-    left: calc(50% - 24rem / 2);
+    left: 45%;
+    top: 55vh;
   }
   .section2Carousel {
     @include shape(8rem, 24rem, 0, rgb($color-white, 0));
@@ -116,20 +116,20 @@
     }
   }
   .section2Circle {
-    @include shape(2rem, 2rem, 50%, $color-white);
+    @include shape(1.5rem, 1.5rem, 50%, $color-white);
     position: absolute;
-    left: calc(50% - 2rem / 2);
-    border: 0.75rem solid $color-white ;
+    left: calc(40% - 1.5rem / 2);
+    border: 0.75rem solid $color-white;
     animation: pulse 2s infinite ease;
     @keyframes pulse {
       0%,
       100% {
-        box-shadow: 0 0 0 0 rgba($color-black, 0.05);
+        box-shadow: 0 0 0 0 rgba($color-grey, 0.05);
         transform: scale(1);
       }
       50% {
-        box-shadow: 0 0 0.5rem 0.25rem rgba($color-white, 0.3);
-        transform: scale(1.1);
+        box-shadow: 0 0 0.5rem 0.25rem rgba($color-grey, 0.3);
+        transform: scale(1.2);
       }
     }
   }
@@ -142,15 +142,13 @@
     @include shape(20rem, 24rem, 0, transparent);
     gap: 1rem;
     .section3LeftList {
-      //list-style-type: square;
-      //list-style-position: inside;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       flex-direction: column;
       gap: 1rem;
       text-align: justify;
-      .section3LeftListItem{
+      .section3LeftListItem {
         @include flex-grid-horizontal;
         gap: 1rem;
       }
@@ -164,7 +162,12 @@
 
 .item {
   //animation: slideIn 1s ease-in-out;
-  mask-image: linear-gradient(to bottom, transparent, transparent 50%, black 50%);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    transparent 50%,
+    black 50%
+  );
   animation: revealImage 5s ease-in-out forwards;
 }
 
@@ -202,13 +205,124 @@
 }
 @keyframes revealImage {
   0% {
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 100%, rgba(0,0,0,1) 100%); // Start with half of the image masked
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 100%,
+      rgba(0, 0, 0, 1) 100%
+    ); // Start with half of the image masked
     mask-size: 200% 200%; // Increase mask size to cover entire image
     mask-position: top; // Start the mask from the top
   }
   100% {
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 0%); // End with no mask
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 0%
+    ); // End with no mask
     mask-size: 100% 100%; // Normal mask size
     mask-position: bottom; // Move the mask to the bottom
+  }
+}
+
+@include respond(phone) {
+  .section1 {
+    padding: 2rem 0;
+    @include full-viewport;
+    @include flex-grid-horizontal;
+    gap: 2rem;
+    .section1Left {
+      width: 85%;
+    }
+    .section1Right {
+      @include shape(12rem, 18rem, 0%, transparent);
+      position: relative;
+      filter: drop-shadow(0.25rem 0.25rem 0.25rem rgb(0, 0, 0, 0.25));
+    }
+  }
+  .section2 {
+    position: relative;
+    //display: flex;
+    //flex-flow: column;
+    //align-items: center;
+    //FlexBox is moving both absolute and static elements (circles and rectangles.)
+    height: unset;
+    .sectionBoxContainer {
+      top:0;
+      display: flex;
+      justify-items: flex-start;
+      gap: 2rem;
+      padding: 4rem 0;
+      flex-flow: column wrap;
+      align-items: center;
+    }
+    .section2Line {
+      display: none;
+    }
+    .section2Background {
+    }
+    .section2Backdrop {
+    }
+    .section2Box {
+      @include shape(unset, 80%, 0, transparent);
+      position: static;
+      justify-content: flex-start;
+    }
+    .section2FailureBox {
+      display: flex;
+      text-align: left;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: center;
+      justify-items: center;
+      align-content: center;
+      //#607895
+      @include shape(6rem, 100%, 1rem, transparent);
+      position: static;
+      padding: 1rem 0;
+      .section2FailureBoxIcon {
+        @include flex-grid-horizontal;
+        @include shape(4rem, 4rem, 50%, $color-white);
+        z-index: -1;
+        position: absolute;
+        bottom: -1rem;
+      }
+    }
+    .section2InfoBoxes {
+      @include shape(13rem, 80%, 0, rgb($color-white, 0));
+      left: 0;
+      top: 0;
+      padding: 0;
+      position: relative;
+    }
+    .section2Carousel {
+      @include flex-grid-horizontal;
+      @include shape(8rem, 100%, 0, rgb($color-white, 0));
+      .section2CarouselSlide {
+        @include shape(10rem, 80%, 0, rgb($color-white, 0));
+        @include flex-grid-horizontal;
+        align-items: flex-start;
+      }
+    }
+    .section2Circle {
+      display: none;
+    }
+  }
+  .section3 {
+    @include shape(unset, unset, 0, transparent);
+    padding: 2rem 0;
+    justify-content: center;
+    .section3Left {
+      @include shape(unset, 80%, 0, transparent);
+      .section3LeftList {
+        gap: 2rem;
+        .section3LeftListItem {
+          display: flex;
+          align-items: flex-start;
+        }
+      }
+    }
+    .section3Right {
+      display: none;
+    }
   }
 }

@@ -1,6 +1,7 @@
 @import "../../scss/mixins.module";
 @import "../../scss/variables.module";
 .container {
+  @include shape(14rem, 100vw, 0, $color-accent);
   .containerTop {
     @include shape(10rem, 100vw, 0, $color-accent);
     display: flex;

@@ -28,10 +28,10 @@ export default function Footer() {
 
       </div>
       <div className={styles.containerBottom}>
-        <p className={typography.footer__white}>
-          © Copyright 2024 by MPI-SWS
-        </p>
-        <p className={typography.footer__white}>Privacy Policy</p>
+        <a href={"https://imprint.mpi-klsb.mpg.de/sws/auto-cypher.eu"} className={typography.footer__white}>
+          Imprint
+        </a>
+        <a href={"https://data-protection.mpi-klsb.mpg.de/sws/auto-cypher.eu"} className={typography.footer__white}>Data Protection</a>
       </div>
     </footer>
   );

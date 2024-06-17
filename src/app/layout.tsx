@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{position: "relative", width: "100vw"}}>
+      <body style={{position: "relative"}}>
       <Navigation/>
       {children}
       <Footer/>

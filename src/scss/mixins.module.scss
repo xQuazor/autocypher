@@ -78,10 +78,5 @@
   width: $width;
   border-radius: $borderRadius;
   background-color: $color;
-
-  @include respond(phone){
-    height: $height / 1.125;
-    width: $width / 1.125;
-  }
 }
 

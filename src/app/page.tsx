@@ -12,7 +12,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import BalanceIcon from "@mui/icons-material/Balance";
 import ExpandIcon from "@mui/icons-material/Expand";
-import {Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -73,15 +73,8 @@ function Section1() {
 
 function Section2() {
   return (
-    <section id={"section2"} className={styles.section2}>
+    <section id={"section2"}>
       <LineAndBoxesAnimation />
-      <Image
-        className={styles.section2Background}
-        src={"/home/section2.png"}
-        alt={"Background Image"}
-        fill={true}
-        style={{ objectFit: "cover" }}
-      />
     </section>
   );
 }
@@ -156,7 +149,7 @@ const LineAndBoxesAnimation = () => {
       onUpdate: (self) => {
         gsap.set(lineRef.current, {
           height: `${self.progress * totalScrollAmount}px`,
-          maxHeight: `${0.74 * viewportHeight}px`,
+          maxHeight: `${0.78 * viewportHeight}px`,
         });
       },
     });
@@ -212,64 +205,70 @@ const LineAndBoxesAnimation = () => {
   };
 
   return (
-    <section className={styles.section2} ref={containerRef}>
-      <div className={styles.section2Backdrop}></div>
+    <div className={styles.section2} ref={containerRef}>
+      {/*<div className={styles.section2Backdrop}></div>*/}
       <div ref={lineRef} className={styles.section2Line}></div>
+      {/*<Image*/}
+      {/*  className={styles.section2Background}*/}
+      {/*  src={"/home/section2.png"}*/}
+      {/*  alt={"Background Image"}*/}
+      {/*  fill={true}*/}
+      {/*  style={{ objectFit: "cover" }}*/}
+      {/*/>*/}
       <div
         ref={addCircleRef}
         className={styles.section2Circle}
-        style={{ top: "20vh" }}
+        style={{ top: "22vh" }}
       ></div>
       <div
         ref={addCircleRef}
         className={styles.section2Circle}
-        style={{ top: "45vh" }}
+        style={{ top: "47vh" }}
       ></div>
       <div
         ref={addCircleRef}
         className={styles.section2Circle}
-        style={{ top: "74vh" }}
+        style={{ top: "78vh" }}
       ></div>
-      <div
-        className={styles.section2Box}
-        ref={addBoxRef}
-        style={{ top: "10vh", left: "55%" }}
-      >
-        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
-          What are Cyber-Physical Systems?
-        </h3>
-        <p className={typography.paragraph}>
-          Cyber-physical systems (CPS) are complex systems with tight
-          interactions between cyber elements and physical components. The cyber
-          elements are control algorithms implemented by computer-based
-          software.
-        </p>
+      <div className={styles.sectionBoxContainer}>
+        <div className={styles.section2Box} ref={addBoxRef}>
+          <h3
+            className={typography.heading3 + " " + utilities.margin_bot_small}
+          >
+            What are Cyber-Physical Systems?
+          </h3>
+          <p className={typography.paragraph}>
+            Cyber-physical systems (CPS) are complex systems with tight
+            interactions between cyber elements and physical components. The
+            cyber elements are control algorithms implemented by computer-based
+            software.
+          </p>
+        </div>
+        <div className={styles.section2Box} ref={addBoxRef}>
+          <h3
+            className={typography.heading3 + " " + utilities.margin_bot_small}
+          >
+            Issues with Control Software
+          </h3>
+          <p className={typography.paragraph}>
+            Developing the embedded control software for CPS is currently ad hoc
+            and error-prone, which has created costly undesired behaviours,
+            particularly in safety-critical applications.
+          </p>
+        </div>
+        <div
+          className={styles.section2InfoBoxes}
+          ref={addBoxRef}
+        >
+          <h3
+            className={typography.heading3 + " " + utilities.margin_bot_small}
+          >
+            Real World Examples of CPS failure
+          </h3>
+          <Carousel />
+        </div>
       </div>
-      <div
-        className={styles.section2Box}
-        ref={addBoxRef}
-        style={{ top: "35vh", right: "55%" }}
-      >
-        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
-          Issues with Control Software
-        </h3>
-        <p className={typography.paragraph}>
-          Developing the embedded control software for CPS is currently ad hoc
-          and error-prone, which has created costly undesired behaviours,
-          particularly in safety-critical applications.
-        </p>
-      </div>
-      <div
-        className={styles.section2InfoBoxes}
-        ref={addBoxRef}
-        style={{ top: "55vh", left: "54%" }}
-      >
-        <h3 className={typography.heading3 + " " + utilities.margin_bot_small}>
-          Real World Examples of CPS failure
-        </h3>
-        <Carousel />
-      </div>
-    </section>
+    </div>
   );
 };
 
@@ -283,8 +282,6 @@ function CPSFailureBox({ heading, text, icon }) {
       <p className={typography.paragraph + " " + utilities.margin_bot_small}>
         {text}
       </p>
-      <a className={typography.paragraph__grey}> Learn More</a>
-      {/*<div className={styles.section2FailureBoxIcon}>{icon}</div>*/}
     </div>
   );
 }

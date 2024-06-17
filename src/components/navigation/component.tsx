@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import styles from "./component.module.scss";
 import Link from "next/link";
@@ -11,12 +11,10 @@ export default function Navigation() {
   const toggleMenu = () => {
     setOpen(!open);
   };
+
   return (
-    <nav
-      className={styles.container}
-      style={{ position: "absolute", top: "0" }}
-    >
-      <button className={styles.menuIcon} onClick={toggleMenu} >
+    <nav className={styles.container}>
+      <button className={styles.menuIcon} onClick={toggleMenu}>
         <MenuIcon htmlColor={color_black} />
       </button>
       <Link href={"/"} className={styles.container__logo}>
@@ -27,7 +25,9 @@ export default function Navigation() {
           style={{ objectFit: "contain", float: "left" }}
         />
       </Link>
-      <div className={styles.container__links}>
+      <div
+        className={`${styles.container__links} ${open ? styles.container__links__open : ""}`}
+      >
         <Link className={styles.paragraph} href={"/"}>
           Home
         </Link>
