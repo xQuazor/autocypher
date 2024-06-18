@@ -1,0 +1,13 @@
+.margin_bot{
+  margin-bottom: 2rem;
+  &_small{
+    margin-bottom: 1rem;
+  }
+}
+
+.margin_top{
+  margin-top: 2rem;
+  &_small{
+    margin-top: 1rem;
+  }
+}
